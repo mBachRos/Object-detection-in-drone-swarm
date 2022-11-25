@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 from swarm.msg import Detection
 import Classes.receiver
