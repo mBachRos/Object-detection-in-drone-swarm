@@ -1,0 +1,7 @@
+<!-- Launch file for Detection node -->
+<launch>
+
+<node name="detection_node" type="Detection_input.py" pkg="swarm" output="screen" respawn="true">
+
+</node>
+</launch>
