@@ -22,6 +22,7 @@ from swarm.msg import BoatOdometry
 from swarm.msg import SwarmCommand
 ################################# New Line #############################
 from swarm.msg import Detection
+########################################################################
 
 class Listener(object):
     '''This class should be instantiated with a list of topics that
@@ -34,10 +35,13 @@ class Listener(object):
         topic_odometry  = "/swarm/data/odom"
         topic_status    = "/swarm/data/status"
         topic_command   = "/swarm/com/command"
-
+        ###### New Line ############
+        topic_detection = "/swarm/data/det"
+        ############################
         self._odometryPublisher     = rospy.Publisher(topic_odometry, BoatOdometry,  queue_size = 50)
         self._statusPublisher       = rospy.Publisher(topic_status,  BoatStatus,    queue_size = 20)
         self._swarmCommandPublisher = rospy.Publisher(topic_command, SwarmCommand,  queue_size = 100)
+        self._detectionPublisher    = rospy.Publisher(topic_detection, Detection, queue_size = 50)
 
     def _readHeader(self, msg):
         return Json.json2Header(msg['header'])
@@ -47,7 +51,11 @@ class Listener(object):
 
         odometryMsg = Json.json2SwarmOdometry(json_msg)
         self._odometryPublisher.publish(odometryMsg)
-    
+    ########### New Line #####################
+    def _publishDetection(self, json_msg):
+        detectionMsg = Json.json2Detection(json_msg)
+        self._detectionPublisher.publish(detectionMsg)
+    #########################################
     def _publishStatus(self, json_msg):
         '''Helper method to publish decoded JSON messages'''
 
@@ -69,6 +77,10 @@ class Listener(object):
 
                 if header.msgType == MsgType.ODOMETRY:
                     self._publishOdometry(msg)
+                ################ NEW LINE ###################
+                if header.msgType == MsgType.DETECTION:
+                    self._publishDetection(msg)
+                #############################################
                 if header.msgType == MsgType.BOAT_STATUS:
                     self._publishStatus(msg)
                 if header.msgType == MsgType.SWARM_COMMAND:
