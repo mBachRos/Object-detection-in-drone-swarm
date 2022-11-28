@@ -44,7 +44,7 @@ def main():
     odometry_topic    = rospy.get_param('~odometry_subscriber',      "/autopilot/current")
     status_topic      = rospy.get_param('~status_subscriber',    "/autopilot/status")
     ############# New Line ##################
-    detect_topic      = rospy.get_param('~detect_subscriber', "/Hvor ligger denne?")
+    detect_topic      = rospy.get_param('~detect_subscriber', "/boat/data/det")
     #########################################
 
     #Initialization of publisher socket
