@@ -13,8 +13,6 @@ import rospy
 
 import Json
 
-#New line
-
 from Multicaster import MulticastSender
 
 HEADER_FMT = 'b'
