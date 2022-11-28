@@ -81,7 +81,7 @@ def detection2Json(Detection):
 def json2Detection(msg):
     det = Detection()
     det.header              = json2Header(msg["header"])
-    det.relative_bearing    = msg["relative_position"]
+    det.relative_bearing    = msg["relative_bearing"]
     det.right_detection     = msg["right_detection"]
     return det
 
